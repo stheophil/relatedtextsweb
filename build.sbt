@@ -1,17 +1,17 @@
-// Turn this project into a Scala.js project by importing these settings
-scalaJSSettings
+import play.Project._
 
-name := "Example"
+lazy val relatedtexts = project.in(file("modules/relatedtexts"))
 
-version := "0.1-SNAPSHOT"
+lazy val relatedtextsweb = project.in(file("."))
+    .aggregate(relatedtexts)
+    .dependsOn(relatedtexts)
 
-scalaVersion := "2.11.1"
+name := "relatedtextsweb"
 
-ScalaJSKeys.persistLauncher := true
-
-ScalaJSKeys.persistLauncher in Test := false
+version := "1.0"
 
 libraryDependencies ++= Seq(
-    "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6",
-    "org.scala-lang.modules.scalajs" %% "scalajs-jasmine-test-framework" % scalaJSVersion % "test"
+    filters
 )
+
+playScalaSettings
